@@ -1,8 +1,7 @@
 // Jitulex //
 /* This is an example for the Robest Rover motor control board.
-Use pins 4, 5, 6, 7 for Robest V1.
-Use pins 5, 4, 2, 6 for Robest V0
-Use pin 3 for speed in both Versions.
+Use pins 5, 4, 2, 6 for Robest V1
+Use Pin 9 for SPD
 */
 
 #include "Robest.h"  //include the Robest library.
