@@ -1,7 +1,11 @@
 #include "Robest.h"
 
 Robest::Robest(int r1, int r2, int l1, int l2, int spd) {
-
+  _l1 = l1;
+  _l2 = l2;
+  _r1 = r1;
+  _r2 = r2;
+  _spd = spd;
   pinMode(l1, OUTPUT);
   pinMode(l2, OUTPUT);
   pinMode(r1, OUTPUT);
@@ -11,14 +15,10 @@ Robest::Robest(int r1, int r2, int l1, int l2, int spd) {
   pinMode(12, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(10, OUTPUT);
-  pinMode(3, OUTPUT);
+  pinMode(9, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(7, OUTPUT);
-  _l1 = l1;
-  _l2 = l2;
-  _r1 = r1;
-  _r2 = r2;
-  _spd = spd;
+  
 }
 
 
@@ -101,6 +101,34 @@ void Robest::checkBat(int OPT) {
   }
 }
 
+void Robest::enableServo1(bool on1){
+  if(on1 == 1){
+    S1 = 0;
+    s1.attach(3);
+  }
+  else if(on1 == 0){
+    S1 = 1;
+  }
+}
+void Robest::enableServo2(bool on2){
+  if(on2 == 1){
+    S2 = 0;
+    s2.attach(10);
+  }
+  else if(on2 == 0){
+    S2 = 1;
+  }
+}
+void Robest::enableServo3(bool on3){
+  if(on3 == 1){
+    S3 = 0;
+    s3.attach(11);
+  }
+  else if(on3 == 0){
+    S3 = 1;
+  }
+}
+
 void Robest::autoRunBT() {
   if (pass == true) {
     if (Serial.available()) {
@@ -131,14 +159,28 @@ void Robest::autoRunBT() {
       } else if (data == 'p') {
         digitalWrite(7, 0);
       } else if (data == 'R') {
-        int RedVal = Serial.parseInt();
-        analogWrite(3, RedVal);
+       RedVal = Serial.parseInt();
+       if(S1 == 1){
+        analogWrite(3, RedVal);}
+        else if(S1 == 0){
+          constrain(RedVal,0,180);
+          s1.write(RedVal);
+        }
       } else if (data == 'G') {
-        int GreenVal = Serial.parseInt();
-        analogWrite(10, GreenVal);
+        GreenVal = Serial.parseInt();
+        if(S2 == 1){
+        analogWrite(10, GreenVal);}
+        else if(S2 == 0){
+          constrain(GreenVal,0,180);
+          s2.write(GreenVal);}
       } else if (data == 'B') {
-        int BlueVal = Serial.parseInt();
-        analogWrite(11, BlueVal);
+        BlueVal = Serial.parseInt();
+        if(S3 == 1){
+        analogWrite(11, BlueVal);}
+        else if(S3 == 0){
+          constrain(BlueVal,0,180);
+          s3.write(BlueVal);
+        }
       } else if (data == 'E') {
         digitalWrite(8, 1);
       } else if (data == 'e') {
@@ -146,4 +188,13 @@ void Robest::autoRunBT() {
       }
     }
   }
+}
+int Robest::getSliderVal1(){
+  return(int)(RedVal);
+}
+int Robest::getSliderVal2(){
+  return(int)(GreenVal);
+}
+int Robest::getSliderVal3(){
+  return(int)(BlueVal);
 }
