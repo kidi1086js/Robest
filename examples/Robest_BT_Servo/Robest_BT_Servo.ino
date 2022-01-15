@@ -14,6 +14,7 @@ Robest robest(5, 4, 2, 6, 9); //Version 0 for Robest l293d
 void setup() {
 //initialize Robest and define the Baud rate for BT communication.(For V0 and V0 its "9600").
 robest.init(9600);
+//When Servos are disabled, the Slider is driven by PWM
 robest.enableServo1(1);
 robest.enableServo2(1);
 robest.enableServo3(1);
