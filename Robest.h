@@ -28,6 +28,7 @@ class Robest {
   int minOASdistance;
   int echo;
   int trig;
+  int lsense, rsense;
 
   char data;
 
@@ -47,6 +48,7 @@ class Robest {
   void enableServo1(bool on1);
   void enableServo2(bool on2);
   void enableServo3(bool on3);
+  void lineFollowerinit(int L, int R);
   void lineFollower();
   void Read();
   void testRun();
