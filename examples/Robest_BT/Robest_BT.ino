@@ -14,11 +14,13 @@ Robest robest(5, 4, 2, 6, 9); //Version 0 for Robest l293d
 void setup() {
 //initialize Robest and define the Baud rate for BT communication.(For V0 and V0 its "9600").
 robest.init(9600);
-robest.enableServo1(1);
-robest.enableServo2(1);
-robest.enableServo3(1);
+robest.lightinit(1);
+robest.horninit(1);
+//robest.PWM0init(1);
+//robest.enableServo0(1);
 }
 void loop() {
 robest.checkBat(1);
 robest.autoRunBT();
+//robest.IOinit(13,'L','l');
 }
