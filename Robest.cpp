@@ -213,17 +213,23 @@ void Robest::autoRunBT() {
   Read();
   run();
 }
+void Robest::lineFollowerinit(int L, int R){
+ pinMode(L,INPUT_PULLUP);
+ pinMode(R,INPUT_PULLUP);
+ lsense = L;
+ rsense = R;
+}
 void Robest::lineFollower(){
-  if(digitalRead(13) == 0 && digitalRead(12) == 0){
+  if(digitalRead(lsense) == 0 && digitalRead(rsense) == 0){
     forward();
   }
-  else if(digitalRead(13) == 1 && digitalRead(12) == 0){
+  else if(digitalRead(lsense) == 0 && digitalRead(rsense) == 1){
     left();
   }
-  else if(digitalRead(13) == 0 && digitalRead(12) == 1){
+  else if(digitalRead(lsense) == 1 && digitalRead(rsense) == 0){
     right();
   }
-  else if(digitalRead(13) == 1 && digitalRead(12) == 1){
+  else if(digitalRead(lsense) == 1 && digitalRead(rsense) == 1){
     stop();
   }
 }
